@@ -1,13 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { productsAPI } from './helpers/promises';
 import Item from './Item';
 import ItemListContainer from './ItemListContainer';
 const items = [
-    {id:"01", name:"Producto 1", description:"DETALLE DEL PRODUCTO", price:"precio del producto $", image:""},
+    {id:"01", name:"Producto 1", description:"DETALLE DEL PRODUCTO", price:"precio del producto $", image:"https://herschel.com/content/dam/herschel/products/10011/10011-00001-OS_02.jpg.sthumbnails.680.850.jpg"},
  
  ];
 
 const ItemDetailContainer = () => {
     const [selectedItem, setSelectedItem] = useState(null);
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(() => {
+      getProducts();
+    },[]);
+  
+    const getProducts = async () => {
+      try {
+        const result = await productsAPI;
+        setProducts(result);
+      } catch (error) {
+        console.log({error});
+      } finally {
+        setLoading(false);
+        console.log("Terminacion de API");
+      }
+    };
+    if(loading) {
+      return <h1>LOADING...</h1>;
+    }
+  
  
  return (
     <div>
