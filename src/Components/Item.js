@@ -12,8 +12,7 @@ const Item = ({id, name, description, stock, price, setSelectedItem}) =>{
     return (
         <>
         <div>
-            <h2>Producto: {name}</h2>
-            <h4>Detalles: {description}</h4>
+            <h2>{name}</h2>
            {/* <ItemCounter stock={stock} setStockSelected={setStockSelected} /> */}
             <button onClick={selectedItem}>Seleccionar Producto</button>
 
